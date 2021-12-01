@@ -16,12 +16,11 @@ func Day1() {
 	fmt.Printf("Answer to Day1, Q1: %v\n", answer1)
 
 	answer2 := solver2(data)
-	fmt.Printf("Answer to Day1, Q2: %v", answer2)
+	fmt.Printf("Answer to Day1, Q2: %v\n", answer2)
 }
 
 func solver1(data []int) int {
 	increase := 0
-
 	for i, v := range data {
 		if size := len(data); (i + 1) == size {
 			break
@@ -30,26 +29,19 @@ func solver1(data []int) int {
 			increase += 1
 		}
 	}
-
 	return increase
 }
 
 func solver2(data []int) int {
 	increase := 0
-
 	for i := range data {
 		if size := len(data); (i + 3) == size {
 			break
 		}
-		shared := data[i+1] + data[i+2]
-		avgCurrent := data[i] + shared
-		avgNext := shared + data[i+3]
-
-		if avgCurrent < avgNext {
+		if data[i] < data[i+3] {
 			increase += 1
 		}
 	}
-
 	return increase
 }
 
