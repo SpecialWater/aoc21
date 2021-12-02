@@ -25,7 +25,7 @@ func Day2() {
 	fmt.Printf("Answer to Day1, Q1: %v\n", depth*horizontal)
 
 	depth2, horizontal2 := navigate2(commands)
-	fmt.Printf("Answer to Day1, Q1: %v\n", depth2*horizontal2)
+	fmt.Printf("Answer to Day1, Q2: %v\n", depth2*horizontal2)
 
 }
 
