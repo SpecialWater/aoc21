@@ -20,7 +20,6 @@ func simulateDays(fish Colony, days int) int {
 	for _, v := range fish {
 		population[v.Cycle] += 1
 	}
-	fmt.Println("Starting: ", population)
 
 	for i := 0; i < days; i++ {
 		populationPriorDay := population

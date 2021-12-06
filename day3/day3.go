@@ -26,7 +26,6 @@ func Day3() {
 
 	oxy, co2 := OxyCo2(oxyCo2)
 	fmt.Printf("Answer to Day3, Q2: %v\n", oxy*co2)
-
 }
 
 func sumBitColumn(bits string, bitLength int) (map[int]int, int) {
