@@ -22,7 +22,6 @@ type Line struct {
 func (line Line) minY() int {
 	return min(line.p1.y, line.p2.y)
 }
-
 func (line Line) maxY() int {
 	return max(line.p1.y, line.p2.y)
 }
