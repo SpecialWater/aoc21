@@ -29,14 +29,6 @@ func median(s []int) int {
 	}
 }
 
-func average(s []int) int {
-	avg := 0
-	for _, v := range s {
-		avg += v
-	}
-	return avg / len(s)
-}
-
 func fuelSolve2(s []int) int {
 	bestFuel := 99999999999
 
