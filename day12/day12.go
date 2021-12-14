@@ -101,7 +101,6 @@ func (g Graph) dfsRecursive(startingNode string, visited map[string]bool, smallC
 		}
 
 	}
-
 }
 
 func IsLower(s string) bool {
