@@ -39,7 +39,7 @@ func solve2() {
 	}
 
 	for i, row := range p2 {
-		for j, _ := range row {
+		for j := range row {
 			if instructions[i][j] {
 				p2[i][j] = "#"
 			} else {
@@ -57,7 +57,7 @@ func solve2() {
 func foldPaper(f fold) {
 
 	if f.direction == "y" {
-		for i, _ := range instructions {
+		for i := range instructions {
 			for j := 0; j < f.value; j++ {
 				instructions[i][j] = instructions[i][j] || instructions[i][f.value*2-j]
 			}
@@ -69,7 +69,7 @@ func foldPaper(f fold) {
 		}
 
 		for i, row := range tmp {
-			for j, _ := range row {
+			for j := range row {
 				tmp[i][j] = instructions[i][j]
 			}
 		}
@@ -78,7 +78,7 @@ func foldPaper(f fold) {
 
 	if f.direction == "x" {
 		for i := 0; i < f.value; i++ {
-			for j, _ := range instructions[i] {
+			for j := range instructions[i] {
 				instructions[i][j] = instructions[i][j] || instructions[f.value*2-i][j]
 			}
 		}
@@ -89,7 +89,7 @@ func foldPaper(f fold) {
 		}
 
 		for i, row := range tmp {
-			for j, _ := range row {
+			for j := range row {
 				tmp[i][j] = instructions[i][j]
 			}
 		}
