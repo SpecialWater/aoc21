@@ -44,25 +44,37 @@ func (g *Graph) AddEdge(vertex, node string) bool {
 
 var g = NewGraph()
 var Visits = 0
+var smallCaves = make(map[string]bool)
 
 func Day12() {
 	readFile("day12/input.txt")
-	fmt.Println(g)
-	g.DFS("start")
-	fmt.Println(Visits)
+	ans1, ans2 := g.DFS("start")
 
-	//fmt.Printf("Answer to Day12, Q1: %v\n", Flashes)
-
-	//fmt.Printf("Answer to Day12, Q2: %v\n", ans)
+	fmt.Printf("Answer to Day12, Q1: %v\n", ans1)
+	fmt.Printf("Answer to Day12, Q2: %v\n", ans2)
 
 }
 
-func (g Graph) DFS(startingNode string) {
+func (g Graph) DFS(startingNode string) (int, int) {
 	visited := g.createVisited()
-	g.dfsRecursive(startingNode, visited)
+	g.dfsRecursive(startingNode, visited, "", false)
+	ogVisits := Visits
+	fmt.Println("ogVisits: ", ogVisits)
+	newVisits := 0
+
+	fmt.Println(smallCaves)
+	for k, v := range smallCaves {
+		Visits = 0
+		g.dfsRecursive(startingNode, visited, k, v)
+		newVisits += Visits - ogVisits
+	}
+
+	newVisits += ogVisits
+
+	return ogVisits, newVisits
 }
 
-func (g Graph) dfsRecursive(startingNode string, visited map[string]bool) {
+func (g Graph) dfsRecursive(startingNode string, visited map[string]bool, smallCave string, smallCaveVisited bool) {
 	newVis := g.createVisited()
 	for k, v := range visited {
 		newVis[k] = v
@@ -72,14 +84,20 @@ func (g Graph) dfsRecursive(startingNode string, visited map[string]bool) {
 		newVis[startingNode] = true
 	}
 
+	if (startingNode == smallCave) && (!smallCaveVisited) {
+		//fmt.Printf("Logic 1: %v, Logic 2: %v \n", startingNode == smallCave, !smallCaveVisited)
+		newVis[startingNode] = false
+		smallCaveVisited = true
+	}
+
+	if startingNode == "end" {
+		Visits += 1
+	}
+
 	for _, node := range g.adjacency[startingNode] {
 
 		if !newVis[node] {
-			g.dfsRecursive(node, newVis)
-		}
-
-		if node == "end" {
-			Visits += 1
+			g.dfsRecursive(node, newVis, smallCave, smallCaveVisited)
 		}
 
 	}
@@ -121,6 +139,13 @@ func readFile(path string) {
 		g.AddVertex(vertices[1])
 		g.AddEdge(vertices[0], vertices[1])
 		g.AddEdge(vertices[1], vertices[0])
+
+		if IsLower(vertices[0]) && (vertices[0] != "start" && vertices[0] != "end") {
+			smallCaves[vertices[0]] = false
+		}
+		if IsLower(vertices[1]) && (vertices[1] != "start" && vertices[1] != "end") {
+			smallCaves[vertices[1]] = false
+		}
 	}
 
 	if err := scanner.Err(); err != nil {
