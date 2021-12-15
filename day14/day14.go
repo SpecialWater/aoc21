@@ -21,9 +21,6 @@ func Day14() {
 func solve(polyCode string, iterations int) int {
 	itSmall := iterations / 2
 	polyCounts := make(map[string]map[string]int)
-	// for k, _ := range polyCounts {
-	// 	polyCounts[k] = make([]charCount, 0)
-	// }
 
 	// iterate halfway through total iterations
 	// Get Strings generated from 2 characters
@@ -40,7 +37,7 @@ func solve(polyCode string, iterations int) int {
 		smallPolyCode = iterate(smallPolyCode)
 	}
 
-	totals := countTotal(smallPolyCode, polyCode, polyCounts)
+	totals := countTotal(smallPolyCode, polyCounts)
 
 	return getAnswer(totals)
 }
@@ -62,7 +59,7 @@ func getAnswer(totalsMap map[string]int) int {
 
 }
 
-func countTotal(str, polyCode string, polyCounts map[string]map[string]int) map[string]int {
+func countTotal(str string, polyCounts map[string]map[string]int) map[string]int {
 	countTotal := make(map[string]int)
 
 	for i := 0; i < len(str)-1; i++ {
