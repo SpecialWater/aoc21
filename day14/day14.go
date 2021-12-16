@@ -24,7 +24,7 @@ func solve(polyCode string, iterations int) int {
 
 	// iterate halfway through total iterations
 	// Get Strings generated from 2 characters
-	for k, _ := range polyBuild {
+	for k := range polyBuild {
 		code := k
 		for i := 0; i < itSmall; i++ {
 			code = iterate(code)
